@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-Time Chat</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+
+    <div id="login-screen" class="container login-container">
+        <h1>Join Chat</h1>
+        <input type="text" id="username-input" placeholder="Enter your username" required>
+        <input type="text" id="room-input" placeholder="Enter room name (e.g., 'general')">
+        <button id="join-btn">Join Chat</button>
+    </div>
+
+    <div id="main-chat-wrapper" class="hidden"> 
+
+        <div id="sidebar">
+            <div id="rooms-header" class="sidebar-section">
+                <h3 class="icon-header"><i class="fa-solid fa-hashtag"></i> Chat Rooms</h3>
+                <div id="room-list">
+                    <div class="room-item active-room">
+                        <span class="room-icon">#</span>
+                        <span class="room-name-display">General</span>
+                        <p class="room-desc">General discussion</p>
+                    </div>
+                    <div class="room-item">
+                        <span class="room-icon">#</span>
+                        <span class="room-name-display">Random</span>
+                        <p class="room-desc">Off-topic chat</p>
+                    </div>
+                </div>
+            </div>
+
+            <button id="create-room-btn">
+                <i class="fa-solid fa-plus"></i> Create Room
+            </button>
+
+            <div id="user-profile" class="sidebar-section">
+                <span class="user-avatar-icon">
+                    <i class="fa-solid fa-user"></i> 
+                </span>
+                <div class="user-info">
+                    <span id="current-username">dheeraj</span>
+                    <span class="status-indicator online">Online</span>
+                </div>
+            </div>
+        </div>
+
+        <div id="main-content">
+            <div id="chat-header-main">
+                <h2 id="room-name-main">General</h2>
+                <p id="room-desc-main">General discussion</p>
+            </div>
+
+            <div id="chat-messages">
+                </div>
+
+            <div id="chat-input-area">
+                <div class="input-formatting-bar">
+                    <span class="formatting-label">B</span>
+                    <span class="formatting-label">I</span>
+                </div>
+                <div class="input-box-wrapper">
+                    <input type="text" id="message-input" placeholder="Type a message... (Shift+Enter for new line)">
+                    <button id="send-btn" class="send-icon-btn">
+                        <i class="fa-solid fa-paper-plane"></i>
+                    </button>
+                </div>
+                <p class="input-hint">Press Enter to send, Shift+Enter for new line</p>
+            </div>
+        </div>
+    </div>
+
+<script src="https://unpkg.com/piesocket-js@1"></script>
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,382 @@
+/* ------------------------------------- */
+/* Global Variables and Reset */
+/* ------------------------------------- */
+:root {
+    --color-primary: #8a2be2; /* Violet/Purple, main active color */
+    --color-primary-dark: #6a1aae;
+    --color-background: #f0f0f0; /* Soft background */
+    --color-sidebar-bg: #ffffff;
+    --color-main-chat-bg: #f7f7f7; /* Slightly darker chat background */
+    --color-text: #1a1a1a;
+    --color-subtle-text: #666666;
+    --border-radius-main: 12px;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--color-background);
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: var(--color-text);
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* ------------------------------------- */
+/* Login Screen Styling (Adjusted for placement) */
+/* ------------------------------------- */
+.login-container {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+}
+.login-container h1 { margin-bottom: 1.5rem; }
+.login-container input[type="text"], .login-container button {
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 1rem;
+    padding: 10px;
+    border-radius: 4px;
+}
+.login-container button {
+    background-color: var(--color-primary);
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+/* ------------------------------------- */
+/* Main Chat Layout (Two Columns) */
+/* ------------------------------------- */
+#main-chat-wrapper {
+    display: flex;
+    width: 100%;
+    max-width: 1200px;
+    height: 90vh;
+    min-height: 600px;
+    border-radius: var(--border-radius-main);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    overflow: hidden; 
+    background-color: var(--color-sidebar-bg);
+}
+
+/* ------------------------------------- */
+/* 1. Sidebar (Left Column) */
+/* ------------------------------------- */
+#sidebar {
+    width: 250px;
+    min-width: 250px;
+    background-color: var(--color-sidebar-bg);
+    border-right: 1px solid #eeeeee;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 0;
+}
+
+.sidebar-section {
+    padding: 0 20px;
+}
+
+#rooms-header {
+    flex-grow: 1; 
+}
+
+.icon-header {
+    font-size: 1.1em;
+    font-weight: 700;
+    margin: 0 0 20px 0;
+    color: var(--color-text);
+}
+.icon-header i {
+    margin-right: 8px;
+    color: var(--color-primary);
+}
+
+/* Room List */
+.room-item {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 15px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.room-item:hover {
+    background-color: #f0f0f0;
+}
+
+.active-room {
+    background-color: var(--color-primary) !important;
+    color: white;
+    font-weight: 500;
+}
+.active-room .room-desc {
+    color: rgba(255, 255, 255, 0.8);
+}
+.room-name-display {
+    font-size: 1em;
+    font-weight: 600;
+}
+.room-desc {
+    font-size: 0.85em;
+    color: var(--color-subtle-text);
+    margin: 0;
+}
+
+/* Create Room Button */
+#create-room-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 20px;
+    margin: 10px 20px;
+    background-color: #f0f0f0;
+    color: var(--color-text);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+#create-room-btn i {
+    margin-right: 8px;
+}
+#create-room-btn:hover {
+    background-color: #e0e0e0;
+}
+
+/* User Profile */
+#user-profile {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    margin-top: 10px;
+    background-color: #f7f7f7;
+    border-top: 1px solid #eeeeee;
+}
+.user-avatar-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background-color: var(--color-primary);
+    color: white;
+    font-size: 1.2em;
+    margin-right: 10px;
+}
+.user-info {
+    display: flex;
+    flex-direction: column;
+}
+#current-username {
+    font-weight: 600;
+    line-height: 1.2;
+}
+.status-indicator {
+    font-size: 0.8em;
+    color: green;
+}
+.status-indicator::before {
+    content: '•';
+    margin-right: 4px;
+    font-size: 1.2em;
+    line-height: 1;
+    color: green;
+}
+
+/* ------------------------------------- */
+/* 2. Main Content (Right Column) */
+/* ------------------------------------- */
+#main-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--color-main-chat-bg); 
+}
+
+/* Header */
+#chat-header-main {
+    padding: 20px 30px;
+    border-bottom: 1px solid #eeeeee;
+    background-color: white;
+}
+#chat-header-main h2 {
+    font-size: 1.5em;
+    font-weight: 600;
+    margin: 0;
+}
+#chat-header-main p {
+    color: var(--color-subtle-text);
+    font-size: 0.9em;
+    margin: 4px 0 0 0;
+}
+
+/* Messages Area */
+#chat-messages {
+    flex-grow: 1;
+    padding: 20px 30px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px; 
+    border: none;
+    height: auto;
+}
+
+/* Message Bubbles */
+.message {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    max-width: 70%;
+}
+
+.message.received {
+    align-self: flex-start;
+}
+
+.message.sent {
+    align-self: flex-end;
+    flex-direction: row-reverse; /* Avatar on the right for sent messages */
+}
+
+.message-bubble-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.message.sent .message-bubble-wrapper {
+    align-items: flex-end; 
+}
+
+.message .text-bubble {
+    background-color: white; 
+    padding: 10px 15px;
+    border-radius: 15px; 
+    max-width: 100%;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05); 
+}
+
+.message.sent .text-bubble {
+    background-color: var(--color-primary); 
+    color: white;
+}
+
+.message .meta {
+    font-size: 0.75em;
+    color: var(--color-subtle-text);
+    margin-bottom: 2px;
+}
+.message.sent .meta {
+    color: rgba(92, 22, 212, 0.8);
+}
+
+.message .username {
+    font-weight: 600;
+    margin-right: 5px;
+}
+
+/* Avatar Placeholder in Chat */
+.user-avatar-in-chat {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background-color: var(--color-primary);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1em;
+    margin-top: 5px; 
+}
+
+/* System Message (Kept simple) */
+.system-message {
+    text-align: center;
+    color: #999;
+    font-style: italic;
+    font-size: 0.9rem;
+    margin: 0.5rem 0;
+}
+
+/* ------------------------------------- */
+/* Input Area Styling */
+/* ------------------------------------- */
+#chat-input-area {
+    padding: 15px 30px;
+    border-top: 1px solid #eeeeee;
+    background-color: white;
+}
+
+.input-formatting-bar {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 10px;
+}
+.formatting-label {
+    font-weight: bold;
+    color: var(--color-subtle-text);
+    font-style: italic;
+    cursor: default;
+}
+.formatting-label:first-child {
+    font-weight: 900;
+}
+
+
+.input-box-wrapper {
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+}
+
+#message-input {
+    flex-grow: 1;
+    min-height: 45px;
+    padding: 12px;
+    border: 1px solid #cccccc;
+    border-radius: 8px;
+    resize: none; 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    font-size: 1em;
+    box-sizing: border-box;
+}
+
+.send-icon-btn {
+    width: 45px;
+    height: 45px;
+    padding: 0;
+    background-color: var(--color-primary);
+    color: white;
+    border-radius: 50%; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.1em;
+    transition: background-color 0.2s;
+}
+.send-icon-btn:hover {
+    background-color: var(--color-primary-dark);
+}
+
+.input-hint {
+    font-size: 0.75em;
+    color: #999;
+    text-align: left;
+    margin: 5px 0 0 0;
+}
